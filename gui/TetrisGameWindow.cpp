@@ -54,12 +54,14 @@ void TetrisGameWindow::paintEvent (QPaintEvent *)
         break;
     }
     QPainter painter(this);
-    QPoint p2( m_basePosition.x ()+ m_boxSize*restonce::TetrisGame::ROW,
+    int dx = m_boxSize*restonce::TetrisGame::ROW+2;
+    int dy = m_boxSize*restonce::TetrisGame::LINE+2;
+    QPoint p2( m_basePosition.x ()+dx,
                m_basePosition.y () );
     QPoint p3( m_basePosition.x (),
-               m_basePosition.y () +m_boxSize*restonce::TetrisGame::LINE);
-    QPoint p4 ( m_basePosition.x () + m_boxSize*restonce::TetrisGame::ROW,
-                m_basePosition.y () + m_boxSize*restonce::TetrisGame::LINE);
+               m_basePosition.y () +dy);
+    QPoint p4 ( m_basePosition.x () + dx,
+                m_basePosition.y () + dy);
     QPoint p1(m_basePosition);
 
     painter.drawLine (p1, p2);
@@ -69,8 +71,8 @@ void TetrisGameWindow::paintEvent (QPaintEvent *)
 
     for(int l=0; l<restonce::TetrisGame::LINE; ++l) {
         for(int r=0; r<restonce::TetrisGame::ROW; ++r) {
-            QPoint p(m_basePosition.x () + r*m_boxSize,
-                     m_basePosition.y () + l*m_boxSize);
+            QPoint p(m_basePosition.x () + r*m_boxSize+1,
+                     m_basePosition.y () + l*m_boxSize+1);// 偏移一个像素, 防止边框与方块挨在一起
 
             int color = 0;
 
